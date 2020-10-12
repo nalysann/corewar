@@ -11,20 +11,30 @@
 # **************************************************************************** #
 
 cmake_minimum_required(VERSION 3.17)
-project(corewar C)
+project(corewar)
 
 set(CMAKE_C_STANDARD 11)
-set(CMAKE_C_FLAGS "-Wall -Wextra -Werror -O2 -march=native -pipe")
+add_compile_options(-Wall -Wextra -Werror -O2 -march=native -pipe)
 
-include_directories(include)
-include_directories(libft/include)
+include_directories(include
+        libft/include)
 
-add_subdirectory(libft)
+link_directories(asm
+        libft)
 
-add_executable(asm)
+add_executable(asm
+        src/asm/op.c)
 
-target_link_libraries(asm ft)
+target_link_libraries(asm
+        "ft"
+        )
 
-add_executable(corewar)
+link_directories(corewar
+        libft)
 
-target_link_libraries(corewar ft)
+add_executable(corewar
+        src/corewar/main.c src/corewar/init_data.c)
+
+target_link_libraries(corewar
+        "ft"
+        )
