@@ -1,17 +1,6 @@
 #ifndef COREWAR_H
 # define COREWAR_H
 # include "op.h"
-typedef struct			s_op
-{
-	char				*name;
-	int					args_amount;
-	int					args[3];
-	int					id;
-	int					cycles;
-	char				*description;
-	int					arg_code;
-	int					dir_size;
-}						t_op;
 
 typedef struct			s_player
 {

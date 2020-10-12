@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   op.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: nalysann <urbilya@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2013/11/06 14:44:35 by zaz              ###   ########.fr       */
+/*   Created: 2020/10/12 18:39:43 by nalysann          #+#    #+#             */
+/*   Updated: 2020/10/12 18:40:01 by nalysann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
 
-t_op    op_tab[17] =
+t_op	g_op_tab[17] =
 {
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
 	{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0},
 	{"add", 3, {T_REG, T_REG, T_REG}, 4, 10, "addition", 1, 0},
-	{"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, "soustraction", 1, 0},
+	{"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, "subtraction", 1, 0},
 	{"and", 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 6, 6,
 		"et (and  r1, r2, r3   r1&r2 -> r3", 1, 0},
 	{"or", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 7, 6,
