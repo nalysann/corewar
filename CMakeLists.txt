@@ -33,7 +33,7 @@ link_directories(corewar
         libft)
 
 add_executable(corewar
-        src/corewar/main.c src/corewar/init_data.c src/corewar/utils.c)
+        src/corewar/main.c src/corewar/init_data.c src/corewar/utils.c src/corewar/players.c)
 
 target_link_libraries(corewar
         "ft"
