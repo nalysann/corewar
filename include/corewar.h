@@ -47,4 +47,6 @@ typedef struct			s_data
 	t_carriage			*carriage_list;
 }						t_data;
 
+void					init_data(int argc, char **argv, t_data *data);
+
 #endif
