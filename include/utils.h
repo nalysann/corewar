@@ -10,6 +10,9 @@
 # define WRONG_FLAG "ERROR: Wrong flag"
 # define WRONG_D_FLAG_USAGE "ERROR: Wrong usage of '-dump' or '-d'"
 # define WRONG_PLAYERS_AMOUNT "ERROR: Wrong players amount"
+# define WRONG_N_FLAG_USAGE "ERROR: Wrong usage of '-n'"
+# define WRONG_N_FLAG_USAGE_ID "ERROR: Wrong id used with '-n'"
+# define WRONG_N_FLAG_USAGE_DUP "ERROR: Duplicate id used with '-n'"
 
 # define E_NONE			0
 # define E_ALLOC		1

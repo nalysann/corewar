@@ -26,6 +26,17 @@ void check_extension(char *filename, char *old) {
 }
 
 
+void debug_players(t_player *player)
+{
+	ft_printf("id = %d\n", player->id);
+	ft_printf("filename = %s\n", player->filename);
+	ft_printf("name = %s\n", player->name);
+	ft_printf("comment = %s\n", player->comment);
+	ft_printf("exec_size = %d\n", player->exec_size);
+	ft_printf("exec_code = %s\n", player->exec_code);
+	ft_printf("starting_point = %d\n", player->starting_point);
+}
+
 void debug_data(t_data *data) {
 	ft_printf("players_amount = %d\n", data->players_amount);
 	ft_printf("a_flag = %d\n", data->a_flag);
@@ -38,4 +49,13 @@ void debug_data(t_data *data) {
 	ft_printf("game_cycles = %d\n", data->game_cycles);
 	ft_printf("live_ops = %d\n", data->live_ops);
 	ft_printf("checks_performed = %d\n", data->checks_performed);
+	ft_printf("\n");
+	int i = 0;
+
+	while (i < data->players_amount)
+	{
+		debug_players(data->players[i]);
+		i++;
+		ft_printf("\n");
+	}
 }

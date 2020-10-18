@@ -48,5 +48,6 @@ typedef struct			s_data
 }						t_data;
 
 void					init_data(int argc, char **argv, t_data *data);
+void					players_init(char **argv, t_data *data);
 
 #endif

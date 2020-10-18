@@ -63,6 +63,23 @@ static int		manage_d_flag(char **argv)
 	return (ft_atoi(*argv));
 }
 
+static void		alloc_memory_for_players(t_data *data)
+{
+	int i;
+
+	i = 0;
+	data->players = (t_player **)ft_memalloc(sizeof(t_player *) * data->players_amount);
+	if (!data->players)
+		exit_with_error(ALLOC_MSG, 1);
+	while (i < data->players_amount)
+	{
+		data->players[i] = (t_player *)ft_memalloc(sizeof(t_player));
+		if (!data->players[i])
+			exit_with_error(ALLOC_MSG, 1);
+		++i;
+	}
+}
+
 void init_data(int argc, char **argv, t_data *data) {
 	data->a_flag = 0;
 	data->d_flag = 0;
@@ -79,4 +96,5 @@ void init_data(int argc, char **argv, t_data *data) {
 	data->checks_performed = 0;
 	data->arena = NULL;
 	data->carriage_list = NULL;
+	alloc_memory_for_players(data);
 }
