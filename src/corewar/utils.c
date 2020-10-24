@@ -37,7 +37,7 @@ void debug_players(t_player *player)
 	ft_printf("starting_point = %d\n", player->starting_point);
 }
 
-void debug_data(t_data *data) {
+void	debug_data(t_data *data) {
 	ft_printf("players_amount = %d\n", data->players_amount);
 	ft_printf("a_flag = %d\n", data->a_flag);
 	ft_printf("n_flags = %d\n", data->n_flags);

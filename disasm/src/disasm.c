@@ -1,6 +1,7 @@
 #include "disasm.h"
 #include "op.h"
 #include "utils.h"
+#include "../libft/include/libft.h"
 
 void		write_head_elem(char *elem, int cons, int write_fd, int read_fd)
 {

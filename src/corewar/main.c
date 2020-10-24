@@ -10,6 +10,9 @@ int main(int ac, char *av[])
 		exit_with_error(ARGS_MSG, E_NONE);
 	init_data(ac, av, &data);
 	players_init(av, &data);
-	debug_data(&data);
+	parse_players(&data);
+	init_game(&data);
+	game(&data);
+	finish(&data);
 	return (0);
 }

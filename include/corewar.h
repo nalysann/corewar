@@ -49,5 +49,35 @@ typedef struct			s_data
 
 void					init_data(int argc, char **argv, t_data *data);
 void					players_init(char **argv, t_data *data);
+void					parse_players(t_data *data);
+void					init_game(t_data *data);
+void					delete_carriages(int to_delete, t_data *data);
+t_carriage				*create_carriage(int id, int pos);
+void					display_arena(char *arena, int octets_num);
+int						validate_op(t_data *data, t_carriage *car);
+int						get_ind_value(int arg, int car_pos, char *arena, int flag_l);
+void					get_args(int *args, t_carriage *car, t_data *data);
+void					game(t_data *data);
+void					finish(t_data *data);
+
+
+void					ch_add(t_carriage *car, t_data *cw);
+void					ch_aff(t_carriage *car, t_data *data);
+void					ch_and(t_carriage *car, t_data *data);
+void					ch_fork(t_carriage *car, t_data *data);
+void					ch_ld(t_carriage *car, t_data *data);
+void					ch_ldi(t_carriage *car, t_data *data);
+void					ch_lfork(t_carriage *car, t_data *data);
+void					ch_live(t_carriage *car, t_data *data);
+void					ch_lld(t_carriage *car, t_data *data);
+void					ch_lldi(t_carriage *car, t_data *data);
+void					ch_or(t_carriage *car, t_data *data);
+void					ch_st(t_carriage *car, t_data *data);
+void					ch_sti(t_carriage *car, t_data *data);
+void					ch_xor(t_carriage *car, t_data *data);
+void					ch_sub(t_carriage *car, t_data *data);
+void					ch_zjmp(t_carriage *car, t_data *data);
+
+
 
 #endif

@@ -32,8 +32,40 @@ target_link_libraries(asm
 link_directories(corewar
         libft)
 
-add_executable(corewar
-        src/corewar/main.c src/corewar/init_data.c src/corewar/utils.c src/corewar/players.c)
+add_executable(
+        src/corewar/main.c
+        src/corewar/init_data.c
+        src/corewar/utils.c
+        src/corewar/players.c
+        src/corewar/parse.c
+        src/corewar/int_utils.c
+        src/corewar/init_game.c
+        src/corewar/carriege.c
+        src/corewar/game.c
+        src/corewar/op.c
+        src/corewar/champ_op.c
+        src/corewar/arena.c
+        src/corewar/args.c
+        src/corewar/champ_ops/ops_array.c
+        src/corewar/champ_ops/add.c
+        src/corewar/champ_ops/aff.c
+        src/corewar/champ_ops/and.c
+        src/corewar/champ_ops/fork.c
+        src/corewar/champ_ops/ld.c
+        src/corewar/champ_ops/ldi.c
+        src/corewar/champ_ops/lfork.c
+        src/corewar/champ_ops/live.c
+        src/corewar/champ_ops/lld.c
+        src/corewar/champ_ops/lldi.c
+        src/corewar/champ_ops/or.c
+        src/corewar/champ_ops/st.c
+        src/corewar/champ_ops/sti.c
+        src/corewar/champ_ops/sub.c
+        src/corewar/champ_ops/xor.c
+        src/corewar/champ_ops/zjmp.c
+
+
+        src/corewar/finish.c)
 
 target_link_libraries(corewar
         "ft"

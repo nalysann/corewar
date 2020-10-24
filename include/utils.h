@@ -17,12 +17,16 @@
 # define E_NONE			0
 # define E_ALLOC		1
 # define E_INPUT		2
-
+# include "corewar.h"
 # define CHAR_MINUS '-'
 
 int		ft_isnumber(char *str);
 void	debug_data(t_data *data);
 void	check_extension(char *filename, char *old);
+int		check_pos(int pos);
+int		get_int(char *bytes, int size);
+void	set_int(char *arena, int start_pos, int num);
+
 
 
 #endif

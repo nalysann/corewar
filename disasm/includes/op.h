@@ -7,7 +7,6 @@
 
 # include <fcntl.h>
 # include <stdlib.h>
-# include "../libft/include/libft.h"
 
 # define IND_SIZE				2
 # define REG_SIZE				4

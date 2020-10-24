@@ -1,7 +1,6 @@
 #ifndef DISASM_DISASM_H
 # define DISASM_DISASM_H
 
-# include "../libft/include/libft.h"
 # include "unistd.h"
 # define			OLD_CHAMPION_EXTENSION ".cor"
 # define			NEW_CHAMPION_EXTENSION ".s"

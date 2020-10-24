@@ -1,7 +1,7 @@
 #include "disasm.h"
 #include "utils.h"
 #include <fcntl.h>
-#include <stdlib.h>
+#include "../libft/include/libft.h"
 
 int		main(int argc, char **argv)
 {
@@ -10,12 +10,14 @@ int		main(int argc, char **argv)
 	char	*filename;
 
 	if (argc != 2)
-		ft_throw(ARGS_MSG, E_INPUT);
+		exit_with_error(ARGS_MSG, E_INPUT);
 	if ((read_fd = open(argv[1], O_RDONLY)) == -1)
-		ft_throw(OPEN_FILE_MSG, E_INPUT);
+		exit_with_error(OPEN_FILE_MSG, E_INPUT);
 	check_extension(argv[1], OLD_CHAMPION_EXTENSION);
 	filename = change_extension(argv[1], OLD_CHAMPION_EXTENSION, NEW_CHAMPION_EXTENSION);
 //	TODO CHECK ERROR
 	write_fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0777);
+	if (write_fd < 0)
+		exit_with_error(OPEN_FILE_MSG, E_INPUT);
 	disassemble(write_fd, read_fd);
 }

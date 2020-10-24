@@ -92,4 +92,6 @@ typedef struct		s_op
 	int		dir_size;
 }					t_op;
 
+
+
 #endif
