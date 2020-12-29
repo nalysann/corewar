@@ -12,8 +12,6 @@
 
 #include "asm.h"
 
-extern t_op	*g_op_tab;
-
 int		pattern(char *t)
 {
 	int i;

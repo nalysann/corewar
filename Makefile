@@ -30,7 +30,6 @@ ASM_SRC := analize_lex.c \
            header_pars.c \
            init_info.c \
            main.c \
-           op.c \
            operation.c \
            reading_proc.c \
            split_tok.c \

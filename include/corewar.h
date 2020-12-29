@@ -13,7 +13,7 @@
 #ifndef COREWAR_H
 # define COREWAR_H
 
-# include "opc.h"
+# include "jop.h"
 
 typedef struct			s_player
 {

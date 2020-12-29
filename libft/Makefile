@@ -12,7 +12,7 @@
 
 NAME = libft.a
 
-CFLAGS += -Wall -Wextra -Werror \
+CFLAGS += -Wall -Wextra \
           $(addprefix -I , $(INC_DIR)) \
           -MD \
           -march=native -O2 -pipe

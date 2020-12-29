@@ -12,8 +12,6 @@
 
 #include "asm.h"
 
-extern t_op	*g_op_tab;
-
 int		verify_label(char *name, t_label **list)
 {
 	t_label *l;
