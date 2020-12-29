@@ -193,7 +193,7 @@ include $(wildcard $(OBJ_DIR)/$(CRW_DEP))
 
 clean:
 	@printf "$(CYAN)>>> Cleaning $(FT_DIR) <<<\n$(RESET)"
-	@$(MAKE) -sC $(FT_DIR) clean
+	@$(MAKE) -C $(FT_DIR) clean
 	@printf "$(CYAN)>>> Cleaning $(ASM) and $(CRW) <<<\n$(RESET)"
 	@printf "$(RED)"
 	rm -rf $(OBJ_DIR)
@@ -201,7 +201,7 @@ clean:
 
 fclean: clean
 	@printf "$(CYAN)>>> Purging $(FT_DIR) <<<\n$(RESET)"
-	@$(MAKE) -sC $(FT_DIR) fclean
+	@$(MAKE) -C $(FT_DIR) fclean
 	@printf "$(CYAN)>>> Purging $(ASM) and $(CRW) <<<\n$(RESET)"
 	@printf "$(RED)"
 	rm -f $(ASM) $(CRW)

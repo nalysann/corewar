@@ -19,7 +19,7 @@ char					*ft_ulltoa_base(unsigned long long dgt, int base)
 	char				*retn;
 
 	i = 0;
-	if (base < 2 && base > 16)
+	if (base < 2 || base > 16)
 		return (NULL);
 	if (!dgt)
 		return (ft_strdup("0"));
