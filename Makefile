@@ -10,92 +10,99 @@
 #                                                                              #
 # **************************************************************************** #
 
-ASM = asm
-CRW = corewar
+ASM := asm
+CRW := corewar
 
 # **************************************************************************** #
 
-ASM_DIR = asm
-
-ASM_SRC = analize_lex.c \
-          analize_order.c \
-          convert.c \
-          convert_token.c \
-          error_manager.c \
-          free_things.c \
-          header_pars.c \
-          init_info.c \
-          main.c \
-          operation.c \
-          reading_proc.c \
-          split_tok.c \
-          utils.c \
-          utils2.c \
-          utils3.c \
-          verify_things.c
-
-ASM_SRC = $(addprefix $(ASM_DIR)/, $(ASM_SRC))
-ASM_OBJ = $(ASM_SRC:.c=.o)
-ASM_DEP = $(ASM_SRC:.c=.d)
+SRC_DIR := src
 
 # **************************************************************************** #
 
-CRW_DIR = corewar
+ASM_DIR := asm
 
-CRW_SRC = add.c \
-          aff.c \
-          and.c \
-          arena.c \
-          args.c \
-          carriege.c \
-          champ_op.c \
-          finish.c \
-          fork.c \
-          game.c \
-          init_data.c \
-          init_game.c \
-          int_utils.c \
-          ld.c \
-          ldi.c \
-          lfork.c \
-          live.c \
-          lld.c \
-          lldi.c \
-          main.c \
-          op.c \
-          ops_array.c \
-          or.c \
-          parse.c \
-          players.c \
-          st.c \
-          sti.c \
-          sub.c \
-          utils.c \
-          xor.c \
-          zjmp.c
+ASM_SRC := analize_lex.c \
+           analize_order.c \
+           convert.c \
+           convert_token.c \
+           error_manager.c \
+           free_things.c \
+           header_pars.c \
+           init_info.c \
+           main.c \
+           op.c \
+           operation.c \
+           reading_proc.c \
+           split_tok.c \
+           utils.c \
+           utils2.c \
+           utils3.c \
+           verify_things.c
 
-CRW_SRC = $(addprefix $(CRW_SRC)/, $(CRW_SRC))
-CRW_OBJ = $(CRW_SRC:.c=.o)
-CRW_DEP = $(CRW_SRC:.c=.d)
+ASM_SRC := $(addprefix $(ASM_DIR)/, $(ASM_SRC))
+ASM_OBJ := $(ASM_SRC:.c=.o)
+ASM_DEP := $(ASM_SRC:.c=.d)
 
 # **************************************************************************** #
 
-SRC_DIR = src
+CRW_DIR := corewar
 
-INC_DIR = include \
-          $(FT_DIR)/include
+CRW_SRC := add.c \
+           aff.c \
+           and.c \
+           arena.c \
+           args.c \
+           carriege.c \
+           champ_op.c \
+           finish.c \
+           fork.c \
+           game.c \
+           init_data.c \
+           init_game.c \
+           int_utils.c \
+           ld.c \
+           ldi.c \
+           lfork.c \
+           live.c \
+           lld.c \
+           lldi.c \
+           main.c \
+           op.c \
+           ops_array.c \
+           or.c \
+           parse.c \
+           players.c \
+           st.c \
+           sti.c \
+           sub.c \
+           utils.c \
+           xor.c \
+           zjmp.c
 
-OBJ_DIR = obj
-
-SRC = $(addprefix $(SRC_DIR)/, $(ASM_SRC) $(CRW_SRC))
-OBJ = $(addprefix $(OBJ_DIR)/, $(ASM_OBJ) $(CRW_OBJ))
-DEP = $(addprefix $(OBJ_DIR)/, $(ASM_DEP) $(CRW_DEP))
+CRW_SRC := $(addprefix $(CRW_DIR)/, $(CRW_SRC))
+CRW_OBJ := $(CRW_SRC:.c=.o)
+CRW_DEP := $(CRW_SRC:.c=.d)
 
 # **************************************************************************** #
 
-FT_DIR = libft
+FT_DIR := libft
 
-FT = libft.a
+FT := libft.a
+
+# **************************************************************************** #
+
+INC_DIR := include \
+           $(FT_DIR)
+
+# **************************************************************************** #
+
+OBJ_DIR := obj
+
+ASM_OBJ := $(addprefix $(OBJ_DIR)/, $(ASM_OBJ))
+ASM_DEP := $(addprefix $(OBJ_DIR)/, $(ASM_DEP))
+
+CRW_OBJ := $(addprefix $(OBJ_DIR)/, $(CRW_OBJ))
+CRW_DEP := $(addprefix $(OBJ_DIR)/, $(CRW_DEP))
 
 # **************************************************************************** #
 
@@ -111,7 +118,7 @@ endif
 
 # **************************************************************************** #
 
-CFLAGS += -Wall -Wextra -Werror \
+CFLAGS += -Wall -Wextra \
           $(addprefix -I , $(INC_DIR)) \
           -MD \
           -march=native -O2 -pipe
@@ -152,7 +159,7 @@ $(FT_DIR)/$(FT):
 
 $(ASM): $(ASM_OBJ) $(FT_DIR)/$(FT)
 	@printf "$(GREEN)"
-	$(CC) $(LDFLAGS) $(LDLIBS) $(ASM_OBJ) -o $@
+	$(CC) $(ASM_OBJ) $(LDFLAGS) $(LDLIBS) -o $@
 	@printf "$(RESET)"
 
 $(OBJ_DIR)/$(ASM_DIR):
@@ -169,7 +176,7 @@ include $(wildcard $(OBJ_DIR)/$(ASM_DEP))
 
 $(CRW): $(CRW_OBJ) $(FT_DIR)/$(FT)
 	@printf "$(GREEN)"
-	$(CC) $(LDFLAGS) $(LDLIBS) $(CRW_OBJ) -o $@
+	$(CC) $(CRW_OBJ) $(LDFLAGS) $(LDLIBS) -o $@
 	@printf "$(RESET)"
 
 $(OBJ_DIR)/$(CRW_DIR):
@@ -186,7 +193,7 @@ include $(wildcard $(OBJ_DIR)/$(CRW_DEP))
 
 clean:
 	@printf "$(CYAN)>>> Cleaning $(FT_DIR) <<<\n$(RESET)"
-	@$(MAKE) -C $(FT_DIR) clean
+	@$(MAKE) -sC $(FT_DIR) clean
 	@printf "$(CYAN)>>> Cleaning $(ASM) and $(CRW) <<<\n$(RESET)"
 	@printf "$(RED)"
 	rm -rf $(OBJ_DIR)
@@ -194,7 +201,7 @@ clean:
 
 fclean: clean
 	@printf "$(CYAN)>>> Purging $(FT_DIR) <<<\n$(RESET)"
-	@$(MAKE) -C $(FT_DIR) fclean
+	@$(MAKE) -sC $(FT_DIR) fclean
 	@printf "$(CYAN)>>> Purging $(ASM) and $(CRW) <<<\n$(RESET)"
 	@printf "$(RED)"
 	rm -f $(ASM) $(CRW)

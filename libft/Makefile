@@ -12,10 +12,23 @@
 
 NAME = libft.a
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS += -Wall -Wextra \
+          $(addprefix -I , $(INC_DIR)) \
+          -MD \
+          -march=native -O2 -pipe
+
+UNAME_S := $(shell uname -s)
+
+ifeq ($(UNAME_S), Darwin)
+	CC := clang
+endif
+
+ifeq ($(UNAME_S), Linux)
+	CC := gcc
+endif
 
 INC = -I ./includes
+
 SOURCES =	ft_abs.c ft_absi.c ft_absll.c ft_apply_flags.c ft_atoi.c ft_atoi_base.c ft_atol.c ft_bubblesort_array.c \
 			ft_bzero.c ft_ceil.c ft_clamp.c ft_cmp.c ft_data.c  ft_double_tool.c ft_error.c ft_fclamp.c ft_foreach.c \
 			ft_freesplit.c ft_hash.c ft_htoi.c ft_intnew.c ft_delcontent.c ft_is_power_of_x.c ft_isalnum.c ft_isalpha.c \
@@ -36,9 +49,10 @@ SOURCES =	ft_abs.c ft_absi.c ft_absll.c ft_apply_flags.c ft_atoi.c ft_atoi_base.
 			ft_strmapi.c ft_strncat.c ft_strncmp.c ft_strncpy.c ft_strndup.c ft_strnequ.c ft_strnew.c ft_strnew.c ft_strnjoin.c \
 			ft_strjoinfree.c ft_strjoin_free_second.c ft_strnstr.c ft_strrchr.c ft_strrev.c ft_strsplit.c ft_strstr.c ft_strsub.c \
 			ft_strtrim.c ft_strupcase.c ft_strupr.c ft_swap.c ft_tolower.c ft_tools.c ft_toupper.c ft_tree_new.c ft_ulltoa_base.c \
-			ft_wcharlen.c ft_wstrdup.c ft_wstrjoin.c ft_wstrlen.c ft_wstrsub.c get_next_line.c int_funcions.c
+			ft_wcharlen.c ft_wstrdup.c ft_wstrjoin.c ft_wstrlen.c ft_wstrsub.c get_next_line.c int_funcions.c exit_with_error.c
 
 OBJECTS = $(SOURCES:.c=.o)
+DEPS = $(SOURCES:.c=.o)
 
 ODIR = objects
 
@@ -54,10 +68,12 @@ $(ODIR):
 $(ODIR)/%.o: %.c libft.h
 	$(CC) $(CFLAGS) $(DFLAGS) -c $(INC) $< -o $@
 
+include $(wildcard $(DEPS))
+
 clean:
-	@rm -rf $(ODIR)
+	rm -rf $(ODIR)
 
 fclean: clean
-	@rm -rf $(NAME)
+	rm -rf $(NAME)
 
 re: fclean all

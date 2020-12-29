@@ -19,3 +19,5 @@ cmake-build-debug/
 # corewar
 obj/
 test/
+./asm
+./corewar

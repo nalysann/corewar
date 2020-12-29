@@ -177,6 +177,7 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_forward_list		*ft_lstappend_frwd(t_forward_list *head, \
 		t_forward_list *new);
 void				ft_lstappend(t_list **alst, t_list *new);
+void				exit_with_error(const char *error_message, int error_code);
 
 # define STANDART_PRECISION 6
 # define TYPE_NUM	12
@@ -214,5 +215,13 @@ void				ft_lstappend(t_list **alst, t_list *new);
 # define BCOLOR_WHITE	"\x1b[47m"
 
 # define COLOR_RESET	"\x1b[0m"
+
+# ifndef RESET
+#  define RESET		"\033[0;0m"
+# endif
+
+# ifndef RED
+#  define RED		"\033[1;31m"
+# endif
 
 #endif

@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zjmp.c                                             :+:      :+:    :+:   */
+/*   exit_with_error.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalysann <urbilya@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 14:18:25 by nalysann          #+#    #+#             */
-/*   Updated: 2020/12/29 14:18:26 by nalysann         ###   ########.fr       */
+/*   Created: 2020/12/29 15:10:53 by nalysann          #+#    #+#             */
+/*   Updated: 2020/12/29 15:11:09 by nalysann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
-#include "utils.h"
+#include <stddef.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include "libft.h"
 
-void ch_zjmp(t_carriage *car, t_data *data) {
-	int	args[1];
-
-	if (car->carry)
+void	exit_with_error(const char *error_message, int error_code)
+{
+	if (error_message != NULL)
 	{
-		get_args(args, car, data);
-		car->position = check_pos(car->position + args[0] % IDX_MOD);
-		car->step = 0;
+		ft_putstr_fd(RED, STDERR_FILENO);
+		ft_putstr_fd(error_message, STDERR_FILENO);
+		ft_putendl_fd(RESET, STDERR_FILENO);
 	}
+	exit(error_code);
 }

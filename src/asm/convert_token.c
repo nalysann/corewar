@@ -12,6 +12,8 @@
 
 #include "asm.h"
 
+extern t_op	*g_op_tab;
+
 void	cvrt_idir_tdir(t_lex *t, int fd, t_label *lab, int pos)
 {
 	unsigned short	x;
