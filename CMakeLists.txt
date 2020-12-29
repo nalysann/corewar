@@ -46,23 +46,23 @@ add_executable(
         src/corewar/champ_op.c
         src/corewar/arena.c
         src/corewar/args.c
-        src/corewar/champ_ops/ops_array.c
-        src/corewar/champ_ops/add.c
-        src/corewar/champ_ops/aff.c
-        src/corewar/champ_ops/and.c
-        src/corewar/champ_ops/fork.c
-        src/corewar/champ_ops/ld.c
-        src/corewar/champ_ops/ldi.c
-        src/corewar/champ_ops/lfork.c
-        src/corewar/champ_ops/live.c
-        src/corewar/champ_ops/lld.c
-        src/corewar/champ_ops/lldi.c
-        src/corewar/champ_ops/or.c
-        src/corewar/champ_ops/st.c
-        src/corewar/champ_ops/sti.c
-        src/corewar/champ_ops/sub.c
-        src/corewar/champ_ops/xor.c
-        src/corewar/champ_ops/zjmp.c
+        src/corewar/ops_array.c
+        src/corewar/add.c
+        src/corewar/aff.c
+        src/corewar/and.c
+        src/corewar/fork.c
+        src/corewar/ld.c
+        src/corewar/ldi.c
+        src/corewar/lfork.c
+        src/corewar/live.c
+        src/corewar/lld.c
+        src/corewar/lldi.c
+        src/corewar/or.c
+        src/corewar/st.c
+        src/corewar/sti.c
+        src/corewar/sub.c
+        src/corewar/xor.c
+        src/corewar/zjmp.c
 
 
         src/corewar/finish.c)

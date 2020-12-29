@@ -10,47 +10,92 @@
 #                                                                              #
 # **************************************************************************** #
 
-ASM := asm
-CRW := corewar
+ASM = asm
+CRW = corewar
 
 # **************************************************************************** #
 
-ASM_DIR := asm
+ASM_DIR = asm
 
-ASM_SRC :=
+ASM_SRC = analize_lex.c \
+          analize_order.c \
+          convert.c \
+          convert_token.c \
+          error_manager.c \
+          free_things.c \
+          header_pars.c \
+          init_info.c \
+          main.c \
+          operation.c \
+          reading_proc.c \
+          split_tok.c \
+          utils.c \
+          utils2.c \
+          utils3.c \
+          verify_things.c
 
-ASM_SRC := $(addprefix $(ASM_DIR)/, $(ASM_SRC))
-ASM_OBJ := $(ASM_SRC:.c=.o)
-ASM_DEP := $(ASM_SRC:.c=.d)
-
-# **************************************************************************** #
-
-CRW_DIR := corewar
-
-CRW_SRC :=
-
-CRW_SRC := $(addprefix $(CRW_SRC)/, $(CRW_SRC))
-CRW_OBJ := $(CRW_SRC:.c=.o)
-CRW_DEP := $(CRW_SRC:.c=.d)
-
-# **************************************************************************** #
-
-SRC_DIR := src
-
-INC_DIR := include \
-           $(FT_DIR)/include
-
-OBJ_DIR := obj
-
-SRC := $(addprefix $(SRC_DIR)/, $(ASM_SRC) $(CRW_SRC))
-OBJ := $(addprefix $(OBJ_DIR)/, $(ASM_OBJ) $(CRW_OBJ))
-DEP := $(addprefix $(OBJ_DIR)/, $(ASM_DEP) $(CRW_DEP))
+ASM_SRC = $(addprefix $(ASM_DIR)/, $(ASM_SRC))
+ASM_OBJ = $(ASM_SRC:.c=.o)
+ASM_DEP = $(ASM_SRC:.c=.d)
 
 # **************************************************************************** #
 
-FT_DIR := libft
+CRW_DIR = corewar
 
-FT := libft.a
+CRW_SRC = add.c \
+          aff.c \
+          and.c \
+          arena.c \
+          args.c \
+          carriege.c \
+          champ_op.c \
+          finish.c \
+          fork.c \
+          game.c \
+          init_data.c \
+          init_game.c \
+          int_utils.c \
+          ld.c \
+          ldi.c \
+          lfork.c \
+          live.c \
+          lld.c \
+          lldi.c \
+          main.c \
+          op.c \
+          ops_array.c \
+          or.c \
+          parse.c \
+          players.c \
+          st.c \
+          sti.c \
+          sub.c \
+          utils.c \
+          xor.c \
+          zjmp.c
+
+CRW_SRC = $(addprefix $(CRW_SRC)/, $(CRW_SRC))
+CRW_OBJ = $(CRW_SRC:.c=.o)
+CRW_DEP = $(CRW_SRC:.c=.d)
+
+# **************************************************************************** #
+
+SRC_DIR = src
+
+INC_DIR = include \
+          $(FT_DIR)/include
+
+OBJ_DIR = obj
+
+SRC = $(addprefix $(SRC_DIR)/, $(ASM_SRC) $(CRW_SRC))
+OBJ = $(addprefix $(OBJ_DIR)/, $(ASM_OBJ) $(CRW_OBJ))
+DEP = $(addprefix $(OBJ_DIR)/, $(ASM_DEP) $(CRW_DEP))
+
+# **************************************************************************** #
+
+FT_DIR = libft
+
+FT = libft.a
 
 # **************************************************************************** #
 
