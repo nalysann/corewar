@@ -19,9 +19,9 @@ void	exit_with_error(const char *error_message, int error_code)
 {
 	if (error_message != NULL)
 	{
-		ft_putstr_fd(RED, STDERR_FILENO);
+		ft_putstr_fd(RRED, STDERR_FILENO);
 		ft_putstr_fd(error_message, STDERR_FILENO);
-		ft_putendl_fd(RESET, STDERR_FILENO);
+		ft_putendl_fd(RRESET, STDERR_FILENO);
 	}
 	exit(error_code);
 }

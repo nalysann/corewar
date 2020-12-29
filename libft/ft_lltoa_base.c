@@ -22,7 +22,7 @@ char					*ft_lltoa_base(long long num, int base)
 
 	len = 1;
 	neg = num < 0 ? 1 : 0;
-	if (base < 2 && base > 16)
+	if (base < 2 || base > 16)
 		return (NULL);
 	if (!num)
 		return (ft_strdup("0"));

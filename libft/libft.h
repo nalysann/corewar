@@ -216,12 +216,12 @@ void				exit_with_error(const char *error_message, int error_code);
 
 # define COLOR_RESET	"\x1b[0m"
 
-# ifndef RESET
-#  define RESET		"\033[0;0m"
+# ifndef RRESET
+#  define RRESET		"\033[0;0m"
 # endif
 
-# ifndef RED
-#  define RED		"\033[1;31m"
+# ifndef RRED
+#  define RRED		"\033[1;31m"
 # endif
 
 #endif
