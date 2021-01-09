@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ops_array.c                                        :+:      :+:    :+:   */
+/*   op_aff.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalysann <urbilya@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 14:17:26 by nalysann          #+#    #+#             */
-/*   Updated: 2020/12/29 14:17:27 by nalysann         ###   ########.fr       */
+/*   Created: 2021/01/09 09:12:21 by nalysann          #+#    #+#             */
+/*   Updated: 2021/01/09 09:12:22 by nalysann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include "libft.h"
 
-void	(*g_champ_ops[16])(t_carriage *car, t_data *data) = {
-	&ch_live,
-	&ch_ld,
-	&ch_st,
-	&ch_add,
-	&ch_sub,
-	&ch_and,
-	&ch_or,
-	&ch_xor,
-	&ch_zjmp,
-	&ch_ldi,
-	&ch_sti,
-	&ch_fork,
-	&ch_lld,
-	&ch_lldi,
-	&ch_lfork,
-	&ch_aff
-};
+void	op_aff(t_carriage *car, t_corewar *cw)
+{
+	int		args[1];
+
+	get_args(args, car, cw);
+	if (cw->a_flag)
+	{
+		ft_putchar((char)car->reg[args[0] - 1]);
+	}
+}

@@ -1,83 +1,87 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arena.c                                            :+:      :+:    :+:   */
+/*   display_arena.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalysann <urbilya@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 11:15:24 by nalysann          #+#    #+#             */
-/*   Updated: 2020/12/29 11:15:28 by nalysann         ###   ########.fr       */
+/*   Created: 2021/01/09 12:16:40 by nalysann          #+#    #+#             */
+/*   Updated: 2021/01/09 12:16:41 by nalysann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
 #include "libft.h"
 
-static void		get_hex(int n, int *len, char *buff, int i)
+static void		get_hex(int n, int *len, char *buf, int i)
 {
-	int c;
+	int		c;
 
 	if (n >= 16)
 	{
-		*len += 1;
-		get_hex(n / 16, len, buff, i - 1);
+		++*len;
+		get_hex(n / 16, len, buf, i - 1);
 	}
 	c = n % 16 + (n % 16 < 10 ? '0' : 'a' - 10);
-	buff[i] = c;
+	buf[i] = c;
 }
 
-static void		print_hex(char *buff, int len, int width)
+static void		print_hex(char *buf, int len, int width)
 {
 	int i;
 
 	i = 0;
 	while (i + len < width)
 	{
-		++i;
 		ft_putchar('0');
+		++i;
 	}
 	while (i < width)
-		ft_putchar(buff[i++]);
+	{
+		ft_putchar(buf[i++]);
+	}
 }
 
-static void		print_octets(char *arena, int octets_num)
+static void		print_bytes(char *arena, int num_bytes)
 {
 	int		i;
 	int		len;
-	char	buff[2];
+	char	buf[2];
 
 	i = 0;
-	while (i < octets_num)
+	while (i < num_bytes)
 	{
 		len = 1;
-		ft_bzero(buff, 2);
-		get_hex((unsigned char)*arena, &len, buff, 1);
-		print_hex(buff, len, 2);
+		ft_bzero(buf, 2);
+		get_hex((unsigned char)*arena, &len, buf, 1);
+		print_hex(buf, len, 2);
 		ft_putchar(' ');
 		++arena;
 		++i;
 	}
 }
 
-
-
-void display_arena(char *arena, int octets_num) {
-	int		counter;
+void			display_arena(char *arena)
+{
+	int		pos;
 	int		len;
-	char	buff[4];
+	char	buf[4];
+	int		num_bytes;
 
-	counter = 0;
-	while (counter < MEM_SIZE)
+	num_bytes = 64;
+	pos = 0;
+	while (pos < MEM_SIZE)
 	{
-		ft_bzero(buff, 4);
+		ft_bzero(buf, 4);
 		len = 1;
 		ft_putstr("0x");
-		get_hex(counter, &len, buff, 3);
-		print_hex(buff, len, 4);
+		get_hex(pos, &len, buf, 3);
+		print_hex(buf, len, 4);
 		ft_putstr(" : ");
-		print_octets(arena, octets_num);
+		print_bytes(arena, num_bytes);
 		ft_putchar('\n');
-		counter += octets_num;
-		arena += octets_num;
+		pos += num_bytes;
+		arena += num_bytes;
 	}
 }

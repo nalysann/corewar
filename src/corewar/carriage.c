@@ -1,37 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   carriege.c                                         :+:      :+:    :+:   */
+/*   carriage.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalysann <urbilya@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 11:16:27 by nalysann          #+#    #+#             */
-/*   Updated: 2020/12/29 11:16:28 by nalysann         ###   ########.fr       */
+/*   Created: 2021/01/09 09:16:32 by nalysann          #+#    #+#             */
+/*   Updated: 2021/01/09 09:16:34 by nalysann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "utils.h"
-#include "libft.h"
-#include "stdlib.h"
 
-t_carriage *create_carriage(int id, int pos) {
+#include "libft.h"
+
+#include <stdlib.h>
+
+t_carriage	*create_carriage(int id, int pos)
+{
 	t_carriage	*car;
 	int			i;
 
 	car = (t_carriage *)ft_memalloc(sizeof(t_carriage));
-	if (!car)
+	if (car == NULL)
 		exit_with_error(ALLOC_MSG, E_ALLOC);
 	car->id = id;
 	car->carry = 0;
-	car->op_i = -1;
-	car->op = NULL;
-	car->cycles_till_op = 0;
 	car->last_cycle_live = -1;
+	car->sleep_cycles = 0;
 	car->step = 0;
-	car->position = pos;
+	car->pos = pos;
 	car->reg[0] = -id;
-	car->to_delete = 0;
+	car->needs_deletion = 0;
+	car->op_id = -1;
+	car->op = NULL;
 	i = 1;
 	while (i < REG_NUMBER)
 		car->reg[i++] = 0;
@@ -41,23 +44,24 @@ t_carriage *create_carriage(int id, int pos) {
 	return (car);
 }
 
-void delete_carriages(int to_delete, t_data *data) {
+void		delete_carriages(int needs_deletion, t_corewar *cw)
+{
 	t_carriage	*prev;
 	t_carriage	*cur;
 
 	prev = NULL;
-	cur = data->carriage_list;
-	while (to_delete)
+	cur = cw->car_list;
+	while (needs_deletion)
 	{
-		if (cur->to_delete)
+		if (cur->needs_deletion)
 		{
-			if (prev)
+			if (prev != NULL)
 				prev->next = cur->next;
 			else
-				data->carriage_list = cur->next;
+				cw->car_list = cur->next;
 			free(cur);
-			cur = prev ? prev->next : data->carriage_list;
-			--to_delete;
+			cur = (prev != NULL ? prev->next : cw->car_list);
+			--needs_deletion;
 		}
 		else
 		{

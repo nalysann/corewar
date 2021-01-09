@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   st.c                                               :+:      :+:    :+:   */
+/*   ops.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalysann <urbilya@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 14:17:53 by nalysann          #+#    #+#             */
-/*   Updated: 2020/12/29 14:17:54 by nalysann         ###   ########.fr       */
+/*   Created: 2021/01/09 12:28:52 by nalysann          #+#    #+#             */
+/*   Updated: 2021/01/09 12:28:53 by nalysann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include "utils.h"
 
-void ch_st(t_carriage *car, t_data *data) {
-	int args[2];
-	int value;
-
-	get_args(args, car, data);
-	value = car->reg[args[0] - 1];
-	if (car->args[1] == 1)
-		car->reg[args[1] - 1] = value;
-	else
-		set_int(data->arena, args[1] % IDX_MOD + car->position, value);
-}
+void	(*g_ops[16])(t_carriage *car, t_corewar *cw) = {
+	&op_live,
+	&op_ld,
+	&op_st,
+	&op_add,
+	&op_sub,
+	&op_and,
+	&op_or,
+	&op_xor,
+	&op_zjmp,
+	&op_ldi,
+	&op_sti,
+	&op_fork,
+	&op_lld,
+	&op_lldi,
+	&op_lfork,
+	&op_aff
+};

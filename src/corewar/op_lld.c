@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zjmp.c                                             :+:      :+:    :+:   */
+/*   op_lld.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalysann <urbilya@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 14:18:25 by nalysann          #+#    #+#             */
-/*   Updated: 2020/12/29 14:18:26 by nalysann         ###   ########.fr       */
+/*   Created: 2021/01/09 09:08:41 by nalysann          #+#    #+#             */
+/*   Updated: 2021/01/09 09:08:42 by nalysann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include "utils.h"
 
-void ch_zjmp(t_carriage *car, t_data *data) {
-	int	args[1];
+void	op_lld(t_carriage *car, t_corewar *cw)
+{
+	int		args[2];
+	int		res;
 
-	if (car->carry)
+	get_args(args, car, cw);
+	if (car->args[0] == T_DIR)
 	{
-		get_args(args, car, data);
-		car->position = check_pos(car->position + args[0] % IDX_MOD);
-		car->step = 0;
+		res = args[0];
 	}
+	else
+	{
+		res = get_ind_arg(args[0], car->pos, cw->arena, 1);
+	}
+	car->reg[args[1] - 1] = res;
+	car->carry = (res == 0);
 }

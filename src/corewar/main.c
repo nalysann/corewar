@@ -11,20 +11,25 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include "libft.h"
 #include "utils.h"
 
-int main(int ac, char *av[])
-{
-	t_data data;
+#include "libft.h"
 
-	if (ac == 1)
-		exit_with_error(ARGS_MSG, E_NONE);
-	init_data(ac, av, &data);
-	players_init(av, &data);
-	parse_players(&data);
-	init_game(&data);
-	game(&data);
-	finish(&data);
-	return (0);
+int		main(int argc, char *argv[])
+{
+	t_corewar	cw;
+
+	if (argc == 1)
+	{
+		ft_putendl_fd("Usage: ./corewar [-a] [-d N] "
+						"[[-n N] <champion.cor>] [...]", 2);
+		ft_putendl_fd("    -a : print output from \"aff\" operation", 2);
+		ft_putendl_fd("    -d N : dump the memory after N cycles and exit", 2);
+		ft_putendl_fd("    -n N : set a custom player number", 2);
+		exit(E_USAGE);
+	}
+	init_cw(argc, argv, &cw);
+	play_cw(&cw);
+	end_cw(&cw);
+	exit(EXIT_SUCCESS);
 }

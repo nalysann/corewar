@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lfork.c                                            :+:      :+:    :+:   */
+/*   op_and.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalysann <urbilya@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 14:16:40 by nalysann          #+#    #+#             */
-/*   Updated: 2020/12/29 14:16:42 by nalysann         ###   ########.fr       */
+/*   Created: 2021/01/09 08:59:10 by nalysann          #+#    #+#             */
+/*   Updated: 2021/01/09 08:59:11 by nalysann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include "utils.h"
 
-void ch_lfork(t_carriage *car, t_data *data) {
-	t_carriage		*new;
-	int				args[1];
-	int				pos;
-	int				i;
+void	op_and(t_carriage *car, t_corewar *cw)
+{
+	int		args[3];
+	int		values[2];
+	int		res;
+	int		i;
 
-	get_args(args, car, data);
-	pos = check_pos(car->position + args[0]);
-	new = create_carriage(++data->cars_amount, pos);
 	i = 0;
-	while (i < REG_NUMBER)
+	get_args(args, car, cw);
+	while (i < 2)
 	{
-		new->reg[i] = car->reg[i];
+		if (car->args[i] == T_REG)
+			values[i] = car->reg[args[i] - 1];
+		else if (car->args[i] == T_DIR)
+			values[i] = args[i];
+		else if (car->args[i] == T_IND)
+			values[i] = get_ind_arg(args[i], car->pos, cw->arena, 0);
 		++i;
 	}
-	new->carry = car->carry;
-	new->last_cycle_live = car->last_cycle_live;
-	new->next = data->carriage_list;
-	data->carriage_list = new;
+	res = values[0] & values[1];
+	car->reg[args[2] - 1] = res;
+	car->carry = (res == 0);
 }

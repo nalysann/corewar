@@ -13,84 +13,82 @@
 #ifndef COREWAR_H
 # define COREWAR_H
 
-# include "jop.h"
+# include "cop.h"
 
-typedef struct			s_player
+typedef struct	s_player
 {
-	int					id;
-	char				*filename;
-	char				name[PROG_NAME_LENGTH + 1];
-	char				comment[COMMENT_LENGTH + 1];
-	int					exec_size;
-	char				*exec_code;
-	int					starting_point;
-}						t_player;
+	int		id;
+	char	*filename;
+	char	name[PROG_NAME_LENGTH + 1];
+	char	comment[COMMENT_LENGTH + 1];
+	int		size;
+	char	*code;
+	int		start;
+}				t_player;
 
-typedef struct			s_carriage
+typedef struct	s_carriage
 {
 	int					id;
 	int					carry;
-	unsigned char		op_i;
 	int					last_cycle_live;
-	int					cycles_till_op;
-	int					position;
+	int					sleep_cycles;
+	int					pos;
 	int					step;
 	int					reg[REG_NUMBER];
-	int					to_delete;
+	int					needs_deletion;
 	char				args[4];
+	int					op_id;
 	t_op				*op;
 	struct s_carriage	*next;
-}						t_carriage;
+}				t_carriage;
 
-typedef struct			s_data
+typedef struct	s_corewar
 {
-	int					players_amount;
-	int					a_flag;
-	int					n_flags;
-	int					d_flag;
-	int					d_cycles;
-	int					cars_amount;
-	int					last_player_alive;
-	int					cycles_to_die;
-	int					game_cycles;
-	int					live_ops;
-	int					checks_performed;
-	char				*arena;
-	t_player			**players;
-	t_carriage			*carriage_list;
-}						t_data;
+	int			a_flag;
+	int			n_flags;
+	int			d_flag;
+	int			dump_cycles;
+	int			last_player_alive;
+	int			cycles_to_die;
+	int			num_cycles;
+	int			num_live;
+	int			num_checks;
+	char		*arena;
+	int			num_players;
+	t_player	**players;
+	int			num_cars;
+	t_carriage	*car_list;
+}				t_corewar;
 
-void					init_data(int argc, char **argv, t_data *data);
-void					players_init(char **argv, t_data *data);
-void					parse_players(t_data *data);
-void					init_game(t_data *data);
-void					delete_carriages(int to_delete, t_data *data);
-t_carriage				*create_carriage(int id, int pos);
-void					display_arena(char *arena, int octets_num);
-int						validate_op(t_data *data, t_carriage *car);
-int						get_ind_value(int arg, int car_pos, char *arena, int flag_l);
-void					get_args(int *args, t_carriage *car, t_data *data);
-void					game(t_data *data);
-void					finish(t_data *data);
+void			init_cw(int argc, char *argv[], t_corewar *cw);
+void			init_players(char *argv[], t_corewar *cw);
+void			parse_players(t_corewar *cw);
+void			init_session(t_corewar *cw);
+t_carriage		*create_carriage(int id, int pos);
+void			play_cw(t_corewar *cw);
+void			display_arena(char *arena);
+void			delete_carriages(int num_delete, t_corewar *cw);
+int				check_op(t_corewar *cw, t_carriage *car);
+int				get_ind_arg(int arg, int car_pos, const char *arena,
+								int l_flag);
+void			get_args(int *args, t_carriage *car, t_corewar *cw);
+void			end_cw(t_corewar *cw);
 
-
-void					ch_add(t_carriage *car, t_data *cw);
-void					ch_aff(t_carriage *car, t_data *data);
-void					ch_and(t_carriage *car, t_data *data);
-void					ch_fork(t_carriage *car, t_data *data);
-void					ch_ld(t_carriage *car, t_data *data);
-void					ch_ldi(t_carriage *car, t_data *data);
-void					ch_lfork(t_carriage *car, t_data *data);
-void					ch_live(t_carriage *car, t_data *data);
-void					ch_lld(t_carriage *car, t_data *data);
-void					ch_lldi(t_carriage *car, t_data *data);
-void					ch_or(t_carriage *car, t_data *data);
-void					ch_st(t_carriage *car, t_data *data);
-void					ch_sti(t_carriage *car, t_data *data);
-void					ch_xor(t_carriage *car, t_data *data);
-void					ch_sub(t_carriage *car, t_data *data);
-void					ch_zjmp(t_carriage *car, t_data *data);
-
-
+void			op_live(t_carriage *car, t_corewar *cw);
+void			op_ld(t_carriage *car, t_corewar *cw);
+void			op_st(t_carriage *car, t_corewar *cw);
+void			op_add(t_carriage *car, t_corewar *cw);
+void			op_sub(t_carriage *car, t_corewar *cw);
+void			op_and(t_carriage *car, t_corewar *cw);
+void			op_or(t_carriage *car, t_corewar *cw);
+void			op_xor(t_carriage *car, t_corewar *cw);
+void			op_zjmp(t_carriage *car, t_corewar *cw);
+void			op_ldi(t_carriage *car, t_corewar *cw);
+void			op_sti(t_carriage *car, t_corewar *cw);
+void			op_fork(t_carriage *car, t_corewar *cw);
+void			op_lld(t_carriage *car, t_corewar *cw);
+void			op_lldi(t_carriage *car, t_corewar *cw);
+void			op_lfork(t_carriage *car, t_corewar *cw);
+void			op_aff(t_carriage *car, t_corewar *cw);
 
 #endif

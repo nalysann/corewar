@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   aff.c                                              :+:      :+:    :+:   */
+/*   op_ld.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalysann <urbilya@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 11:15:13 by nalysann          #+#    #+#             */
-/*   Updated: 2020/12/29 11:15:15 by nalysann         ###   ########.fr       */
+/*   Created: 2021/01/09 08:50:23 by nalysann          #+#    #+#             */
+/*   Updated: 2021/01/09 08:50:25 by nalysann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include "libft.h"
 
-void ch_aff(t_carriage *car, t_data *data) {
-	int	args[1];
+void	op_ld(t_carriage *car, t_corewar *cw)
+{
+	int		args[2];
+	int		res;
 
-	get_args(args, car, data);
-	if (data->a_flag)
-		ft_putchar((char)car->reg[args[0] - 1]);
+	get_args(args, car, cw);
+	if (car->args[0] == T_DIR)
+	{
+		res = args[0];
+	}
+	else
+	{
+		res = get_ind_arg(args[0], car->pos, cw->arena, 0);
+	}
+	car->reg[args[1] - 1] = res;
+	car->carry = (res == 0);
 }

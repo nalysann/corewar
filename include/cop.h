@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op.h                                               :+:      :+:    :+:   */
+/*   cop.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qweissna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nalysann <urbilya@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/07 16:36:45 by qweissna          #+#    #+#             */
-/*   Updated: 2020/11/07 16:36:49 by qweissna         ###   ########.fr       */
+/*   Created: 2021/01/09 08:14:54 by nalysann          #+#    #+#             */
+/*   Updated: 2021/01/09 08:14:59 by nalysann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OP_H
+#ifndef COP_H
+# define COP_H
 
-# define OP_H
+/*
+** All sizes are in bytes
+** It is assumed that an int is 32 bits. Is this true for you?
+*/
 
 # define IND_SIZE				2
 # define REG_SIZE				4
@@ -29,7 +33,6 @@
 # define CHAMP_MAX_SIZE			(MEM_SIZE / 6)
 
 # define COMMENT_CHAR			'#'
-# define COM_H					';'
 # define LABEL_CHAR				':'
 # define DIRECT_CHAR			'%'
 # define SEPARATOR_CHAR			','
@@ -46,23 +49,47 @@
 # define NBR_LIVE				21
 # define MAX_CHECKS				10
 
-typedef char					t_arg_type;
+/*
+** Argument types
+*/
+
+typedef char	t_arg_type;
 
 # define T_REG					1
 # define T_DIR					2
 # define T_IND					4
 # define T_LAB					8
 
+/*
+** Champion specification
+*/
+
 # define PROG_NAME_LENGTH		128
 # define COMMENT_LENGTH			2048
 # define COREWAR_EXEC_MAGIC		0xea83f3
 
-typedef struct					s_header
+typedef struct	s_header
 {
-	unsigned int				magic;
-	char						prog_name[PROG_NAME_LENGTH + 1];
-	unsigned int				prog_size;
-	char						comment[COMMENT_LENGTH + 1];
-}								t_header;
+	unsigned	magic;
+	char		prog_name[PROG_NAME_LENGTH + 1];
+	unsigned	prog_size;
+	char		comment[COMMENT_LENGTH + 1];
+}				t_header;
+
+/*
+** Operation specification
+*/
+
+typedef struct	s_op
+{
+	char	*name;
+	int		num_args;
+	int		args[3];
+	int		id;
+	int		num_cycles;
+	char	*doc;
+	int		arg_code;
+	int		dir_size;
+}				t_op;
 
 #endif

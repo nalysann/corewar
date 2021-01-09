@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   or.c                                               :+:      :+:    :+:   */
+/*   op_xor.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalysann <urbilya@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 14:17:33 by nalysann          #+#    #+#             */
-/*   Updated: 2020/12/29 14:17:34 by nalysann         ###   ########.fr       */
+/*   Created: 2021/01/09 09:02:06 by nalysann          #+#    #+#             */
+/*   Updated: 2021/01/09 09:02:07 by nalysann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void ch_or(t_carriage *car, t_data *data) {
-	int	args[3];
-	int	values[2];
-	int	res;
-	int	i;
+void	op_xor(t_carriage *car, t_corewar *cw)
+{
+	int		args[3];
+	int		values[2];
+	int		res;
+	int		i;
 
-	get_args(args, car, data);
 	i = 0;
+	get_args(args, car, cw);
 	while (i < 2)
 	{
-		if (car->args[i] == 1)
+		if (car->args[i] == T_REG)
 			values[i] = car->reg[args[i] - 1];
-		else if (car->args[i] == 2)
+		else if (car->args[i] == T_DIR)
 			values[i] = args[i];
-		else if (car->args[i] == 4)
-			values[i] = get_ind_value(args[i], car->position, data->arena, 0);
+		else if (car->args[i] == T_IND)
+			values[i] = get_ind_arg(args[i], car->pos, cw->arena, 0);
 		++i;
 	}
-	res = values[0] | values[1];
+	res = values[0] ^ values[1];
 	car->reg[args[2] - 1] = res;
-	car->carry = res ? 0 : 1;
+	car->carry = (res == 0);
 }

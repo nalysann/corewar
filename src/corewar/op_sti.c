@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   and.c                                              :+:      :+:    :+:   */
+/*   op_sti.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalysann <urbilya@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 11:15:18 by nalysann          #+#    #+#             */
-/*   Updated: 2020/12/29 11:15:20 by nalysann         ###   ########.fr       */
+/*   Created: 2021/01/09 09:05:09 by nalysann          #+#    #+#             */
+/*   Updated: 2021/01/09 09:05:11 by nalysann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include "utils.h"
 
-void ch_and(t_carriage *car, t_data *data) {
-	int args[3];
-	int values[2];
-	int res;
-	int i;
+void	op_sti(t_carriage *car, t_corewar *cw)
+{
+	int		args[3];
+	int		values[3];
+	int		i;
+	int		pos;
 
+	get_args(args, car, cw);
 	i = 0;
-	get_args(args, car, data);
-	while (i < 2)
+	while (i < 3)
 	{
-		if (car->args[i] == 1)
+		if (car->args[i] == T_REG)
 			values[i] = car->reg[args[i] - 1];
-		else if (car->args[i] == 2)
+		else if (car->args[i] == T_DIR)
 			values[i] = args[i];
-		else if (car->args[i] == 4)
-			values[i] = get_ind_value(args[i], car->position, data->arena, 0);
+		else if (car->args[i] == T_IND)
+			values[i] = get_ind_arg(args[i], car->pos, cw->arena, 0);
 		++i;
 	}
-	res = values[0] & values[1];
-	car->reg[args[2] - 1] = res;
-	car->carry = res ? 0 : 1;
+	pos = (values[1] + values[2]) % IDX_MOD + car->pos;
+	set_int(cw->arena, pos, values[0]);
 }

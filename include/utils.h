@@ -13,32 +13,32 @@
 #ifndef UTILS_H
 # define UTILS_H
 
-# define NULL_MSG					NULL
+# include "corewar.h"
+
 # define ALLOC_MSG					"ERROR: Memory allocation failed"
-# define ARGS_MSG					"ERROR: No args"
-# define OPEN_FILE_MSG				"ERROR: Can\'t open file with champion"
-# define WRONG_FILE_EXTENSION_MSG	"ERROR: Wrong file extension"
-# define NO_FLAGS_ARGS "ERROR: No flags arguments"
-# define WRONG_FLAG "ERROR: Wrong flag"
-# define WRONG_D_FLAG_USAGE "ERROR: Wrong usage of '-dump' or '-d'"
-# define WRONG_PLAYERS_AMOUNT "ERROR: Wrong players amount"
-# define WRONG_N_FLAG_USAGE "ERROR: Wrong usage of '-n'"
-# define WRONG_N_FLAG_USAGE_ID "ERROR: Wrong id used with '-n'"
-# define WRONG_N_FLAG_USAGE_DUP "ERROR: Duplicate id used with '-n'"
+# define INVALID_FLAG_MSG			"ERROR: Invalid flag"
+# define MISSING_ARG				"ERROR: Flag argument missing"
+# define EXTENSION_MSG				"ERROR: Invalid file extension"
+# define NUM_PLAYERS_MSG			"ERROR: Invalid number of players"
+# define D_FLAG_MSG					"ERROR: Invalid usage of '-d' or '-dump'"
+# define N_FLAG_MSG					"ERROR: Invalid usage of '-n'"
+# define N_FLAG_ID_MSG				"ERROR: Invalid player id"
+# define N_FLAG_DUPLICATE_MSG		"ERROR: Duplicate player id"
+# define FILE_MSG					"ERROR: Invalid champion file"
+# define READ_MSG					"ERROR: Reading error"
+# define CHAMPION_SIZE_MSG			"ERROR: Invalid champion size"
+# define HEADER_MSG					"ERROR: Invalid magic header"
+# define NULLS_MSG					"ERROR: Invalid nulls"
 
 # define E_NONE			0
 # define E_ALLOC		1
 # define E_INPUT		2
-# include "corewar.h"
-# define CHAR_MINUS '-'
+# define E_USAGE		3
 
-int		ft_isnumber(char *str);
-void	debug_data(t_data *data);
-void	check_extension(char *filename, char *old);
-int		check_pos(int pos);
-int		get_int(char *bytes, int size);
+void	check_cor_extension(const char *filename, const char *extension);
+int		fix_pos(int pos);
+int		ft_isnumber(const char *str);
+int		get_int(const char *bytearray, int size);
 void	set_int(char *arena, int start_pos, int num);
-
-
 
 #endif

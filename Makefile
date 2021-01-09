@@ -46,37 +46,37 @@ ASM_DEP := $(ASM_SRC:.c=.d)
 
 CRW_DIR := corewar
 
-CRW_SRC := add.c \
-           aff.c \
-           and.c \
-           arena.c \
-           args.c \
-           carriege.c \
-           champ_op.c \
-           finish.c \
-           fork.c \
-           game.c \
-           init_data.c \
-           init_game.c \
-           int_utils.c \
-           ld.c \
-           ldi.c \
-           lfork.c \
-           live.c \
-           lld.c \
-           lldi.c \
+CRW_SRC := args.c \
+           carriage.c \
+           check_op.c \
+           cop.c \
+           display_arena.c \
+           end_cw.c \
+           init_cw.c \
+           init_players.c \
+           init_session.c \
            main.c \
-           op.c \
-           ops_array.c \
-           or.c \
-           parse.c \
-           players.c \
-           st.c \
-           sti.c \
-           sub.c \
+           op_add.c \
+           op_aff.c \
+           op_and.c \
+           op_fork.c \
+           op_ld.c \
+           op_ldi.c \
+           op_lfork.c \
+           op_live.c \
+           op_lld.c \
+           op_lldi.c \
+           op_or.c \
+           op_st.c \
+           op_sti.c \
+           op_sub.c \
+           op_xor.c \
+           op_zjmp.c \
+           ops.c \
+           parse_players.c \
+           play_cw.c \
            utils.c \
-           xor.c \
-           zjmp.c
+           utils_int.c
 
 CRW_SRC := $(addprefix $(CRW_DIR)/, $(CRW_SRC))
 CRW_OBJ := $(CRW_SRC:.c=.o)
@@ -117,7 +117,7 @@ endif
 
 # **************************************************************************** #
 
-CFLAGS += -Wall -Wextra \
+CFLAGS += -Wall -Wextra -Werror \
           $(addprefix -I , $(INC_DIR)) \
           -MD \
           -march=native -O2 -pipe

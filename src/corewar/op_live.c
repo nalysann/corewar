@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lld.c                                              :+:      :+:    :+:   */
+/*   op_live.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalysann <urbilya@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 14:16:55 by nalysann          #+#    #+#             */
-/*   Updated: 2020/12/29 14:16:57 by nalysann         ###   ########.fr       */
+/*   Created: 2021/01/09 08:47:58 by nalysann          #+#    #+#             */
+/*   Updated: 2021/01/09 08:48:00 by nalysann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void ch_lld(t_carriage *car, t_data *data) {
-	int	args[2];
-	int	res;
+void	op_live(t_carriage *car, t_corewar *cw)
+{
+	int		args[1];
+	int		num;
 
-	get_args(args, car, data);
-	if (car->args[0] == 2)
-		res = args[0];
-	else
-		res = get_ind_value(args[0], car->position, data->arena, 1);
-	car->reg[args[1] - 1] = res;
-	car->carry = res ? 0 : 1;
+	car->last_cycle_live = cw->num_cycles;
+	get_args(args, car, cw);
+	num = -args[0];
+	if (0 < num && num <= cw->num_players)
+	{
+		cw->last_player_alive = num;
+	}
+	++cw->num_live;
 }
